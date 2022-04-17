@@ -2,6 +2,7 @@
 SC_HANDLE hSCM = NULL;
 SC_HANDLE hSer = NULL;
 #define Random(x)(rand()%x)
+
 LPCSTR RandomString()
 {
 	srand((int)time(NULL));
@@ -19,11 +20,11 @@ void ReleaseDriver(LPCSTR lpFilePath)
 	//x64Grk
 	//IDR_X64GRK1
 	HRSRC hRsrc=FindResourceA(NULL, MAKEINTRESOURCEA(IDR_X64GRK1), "x64Grk");
-	//资源大小
+	//璧勬簮澶у皬
 	DWORD dwSize = SizeofResource(NULL, hRsrc);
-	//加载资源
+	//鍔犺浇璧勬簮
 	HGLOBAL hGlobal = LoadResource(NULL, hRsrc);
-	//获取资源指针
+	//鑾峰彇璧勬簮鎸囬拡
 	LPVOID lpResAddr = LockResource(hGlobal);
 	HANDLE hFile = CreateFileA((LPCSTR)lpFilePath, GENERIC_READ | GENERIC_WRITE, FILE_SHARE_READ | FILE_SHARE_WRITE, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
 	DWORD dwWriteLen = 0;
@@ -38,10 +39,10 @@ void InstallDriver(LPCSTR lpServiceName, LPCSTR lpDisplayName, LPCSTR lpDriverPa
 	hSer = CreateServiceA(hSCM, lpServiceName, lpDisplayName, SERVICE_ALL_ACCESS, SERVICE_KERNEL_DRIVER, SERVICE_DEMAND_START, SERVICE_ERROR_IGNORE, lpDriverPath, NULL, NULL, NULL, NULL, NULL);
 	if (hSer==NULL)
 	{
-		std::cout << "驱动安装失败!" << std::endl;
+		std::cout << "椹卞姩瀹夎澶辫触!" << std::endl;
 	}
 	else {
-		std::cout << "驱动安装成功" << std::endl;
+		std::cout << "椹卞姩瀹夎鎴愬姛" << std::endl;
 	}
 
 
@@ -52,10 +53,10 @@ void StartDriver()
 	BOOL bSucc = StartService(hSer, NULL, NULL);
 	if (bSucc==TRUE)
 	{
-		std::cout << "驱动启动成功" << std::endl;
+		std::cout << "椹卞姩鍚姩鎴愬姛" << std::endl;
 	}
 	else {
-		std::cout << "驱动启动失败" << std::endl;
+		std::cout << "椹卞姩鍚姩澶辫触" << std::endl;
 	}
 }
 
@@ -65,10 +66,10 @@ void StopDriver()
 	BOOL bSucc = ControlService(hSer, SERVICE_CONTROL_STOP, &SerStatus);
 	if (bSucc == TRUE)
 	{
-		std::cout << "驱动停止成功" << std::endl;
+		std::cout << "椹卞姩鍋滄鎴愬姛" << std::endl;
 	}
 	else {
-		std::cout << "驱动停止失败" << std::endl;
+		std::cout << "椹卞姩鍋滄澶辫触" << std::endl;
 	}
 
 
@@ -79,10 +80,10 @@ void UnInstallDriver()
 	BOOL bSucc = DeleteService(hSer);
 	if (bSucc == TRUE)
 	{
-		std::cout << "驱动卸载成功" << std::endl;
+		std::cout << "椹卞姩鍗歌浇鎴愬姛" << std::endl;
 	}
 	else {
-		std::cout << "驱动卸载失败" << std::endl;
+		std::cout << "椹卞姩鍗歌浇澶辫触" << std::endl;
 	}
 	CloseServiceHandle(hSCM);
 	CloseServiceHandle(hSer);
