@@ -15,6 +15,7 @@ LPCSTR RandomString()
 	return Temp;
 }
 
+
 void ReleaseDriver(LPCSTR lpFilePath)
 {
 	//x64Grk
