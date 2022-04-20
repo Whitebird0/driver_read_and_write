@@ -3,16 +3,15 @@
 #include"DataExchangeStruct.h"
 
 
-
 typedef NTSTATUS(*FuncCallBack)(HANDLE hFile, PVOID  pv1, PVOID  pv2, PVOID pv3);
 typedef struct _DataPake{
-	//回调函数中确定是谁调用的ID
+	//鍥炶皟鍑芥暟涓‘瀹氭槸璋佽皟鐢ㄧ殑ID
 	ULONG64 ulInfoId;
-	//实现那种功能的ID
+	//瀹炵幇閭ｇ鍔熻兘鐨処D
 	ULONG64 ulFunctionID;
-	//数据
+	//鏁版嵁
 	ULONG64 ulData;
-	//尺寸
+	//灏哄
 	ULONG64 ulSize;
 }DataPake, * PDataPake;
 
@@ -24,7 +23,7 @@ typedef struct _RegisterAttrCallback {
 typedef NTSTATUS (*ExRegisterAttributeInformationCallbackFunc)(PRegisterAttrCallback prcCallBack);
 typedef NTSTATUS(*whCallBackFunc)(PDataPake ExchangeData);
 
-//通信注册
+//閫氫俊娉ㄥ唽
 NTSTATUS RegisterCommunication(whCallBackFunc whFunc); \
-//卸载通信
+//鍗歌浇閫氫俊
 VOID UnRegisterCommunication();
