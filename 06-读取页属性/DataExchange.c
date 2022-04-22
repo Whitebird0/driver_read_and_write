@@ -13,7 +13,6 @@ NTSTATUS whQueryAttributeInformation(HANDLE hFile, PVOID  pv1, PVOID  pv2, PVOID
 		{
 		
 			ExchangeCallBack(m_Pack);
-
 		}
 		else {
 			if (ExpDisQueryAttrbuteInformationOld)
@@ -30,7 +29,7 @@ NTSTATUS whSetAttributeInformation(HANDLE hFile, PVOID  pv1, PVOID  pv2, PVOID p
 		PDataPake m_Pack = (PDataPake)pv1;
 		if (m_Pack->ulInfoId == 0x12138111)
 		{
-			//µ÷ÓÃÍ¨ĞÅ·Ö·¢
+			//è°ƒç”¨é€šä¿¡åˆ†å‘
 			ExchangeCallBack(m_Pack);
 		}
 		else {
@@ -49,9 +48,9 @@ NTSTATUS RegisterCommunication(whCallBackFunc whFunc)
 {
 	UNICODE_STRING usFunctionName = { 0 };
 	RtlInitUnicodeString(&usFunctionName, L"ExRegisterAttributeInformationCallback");
-	//»ñÈ¡ExRegisterAttributeInformationCallbackµÄµØÖ·
+	//è·å–ExRegisterAttributeInformationCallbackçš„åœ°å€
 	PUCHAR pucFunctionAddress = MmGetSystemRoutineAddress(&usFunctionName);
-	//»ñÈ¡µÚÒ»¸ö»Øµ÷
+	//è·å–ç¬¬ä¸€ä¸ªå›è°ƒ
 	ULONG64 ulCallBackAddress = *(PULONG)(pucFunctionAddress + 0Xd + 3);
 	PULONG64 ExpDisQueryAttrbuteInformation = (PULONG64)((pucFunctionAddress + 0Xd + 7)+ ulCallBackAddress);
 	ExpDisQueryAttrbuteInformationOld = (FuncCallBack)ExpDisQueryAttrbuteInformation[0];
