@@ -4,6 +4,7 @@
 #include"DataExchangeStruct.h"
 #include"ReadMemory.h"
 #include"WriteMemory.h"
+
 #define GET_MODULE_BASE 0x1
 #define GWH_READ_MEMORY 0x2
 #define	GWH_WRITE_MEMORY 0x3
