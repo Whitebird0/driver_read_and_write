@@ -7,6 +7,7 @@ typedef struct	_GetModuleInfo {
 	ULONG64 ulModuleBase;
 }GetModuleInfo,*PGetModuleInfo;
 
+
 typedef struct _RMEMORY_BASIC_INFORMATION {
 	ULONG64  BaseAddress;
 	ULONG64  AllocationBase;
