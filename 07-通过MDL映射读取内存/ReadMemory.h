@@ -3,6 +3,7 @@
 #include<intrin.h>
 //ReadProcessMemory
 NTSTATUS
+
 MmCopyVirtualMemory(
 	IN  PEPROCESS FromProcess,
 	IN  CONST VOID* FromAddress,
