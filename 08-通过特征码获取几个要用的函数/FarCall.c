@@ -3,7 +3,6 @@
 ULONG PsSuspendThreadCode[8] = { 0x24548948 ,0xc894810 , 0x56530824 ,0x41544157 ,0xec834855 ,0xea8b4c40 ,0x33f18b48 ,0x247c89ff };
 ULONG PsResumeThreadCode[8] = { 0x8348f3ff ,0x8b4820ec ,0x7f1ae8da ,0x8548ffc6,0x890274db ,0x48c03303 ,0x5b20c483 ,0x909090c3 };
 
-
 PDRIVER_OBJECT g_DriverObject = NULL;
 extern POBJECT_TYPE* IoDriverObjectType;
 NTSTATUS
@@ -48,17 +47,17 @@ NTSTATUS NTAPI NtGetNextThread(
 	{
 		UNICODE_STRING usFuncName = { 0 };
 		RtlInitUnicodeString(&usFuncName, "ZwGetNextThread");
-		//Win10ø…“‘÷±Ω”uªÒ»°
+		//Win10ÂèØ‰ª•Áõ¥Êé•uËé∑Âèñ
 		ZwGetNextThreadProcFunc = (ZwGetNextThreadProc)MmGetSystemRoutineAddress(&usFuncName);
 	}
-	//√ª’“µΩ
+	//Ê≤°ÊâæÂà∞
 	if (!ZwGetNextThreadProcFunc) {
 		UNICODE_STRING usFuncName1 = { 0 };
 		RtlInitUnicodeString(&usFuncName1, "ZwGetNotificationResourceManager");
-		//‘⁄ZwGetNextThreadœ¬√Ê
+		//Âú®ZwGetNextThread‰∏ãÈù¢
 		PUCHAR punTempAddr = (PUCHAR)MmGetSystemRoutineAddress(&usFuncName1);
 		punTempAddr -= 50;
-		//Ãÿ’˜¬Î  48 8B C4
+		//ÁâπÂæÅÁ†Å  48 8B C4
 		for (size_t i = 0; i < 0x30;i++)
 		{
 			if (punTempAddr[i] == 0x48 && punTempAddr[i + 1] == 0x8B && punTempAddr[i + 2] == 0xC4) {
@@ -79,7 +78,7 @@ NTSTATUS PsSuspendThread(IN PETHREAD Thread, OUT PULONG PreviousSuspendCount OPT
 	if (!PsSuspendThreadFunc)
 	{
 		ULONG64 ulRetAddr;
-		//Ãÿ’˜ªÒ»°
+		//ÁâπÂæÅËé∑Âèñ
 		GetAddr(PsSuspendThreadCode, &ulRetAddr);
 		PsSuspendThreadFunc = (PsSuspendThreadProc)ulRetAddr;
 
@@ -98,7 +97,7 @@ NTSTATUS PsResumeThread(IN PETHREAD Thread, OUT PULONG PreviousSuspendCount OPTI
 	if (!PsResumeThreadFunc)
 	{
 		ULONG64 ulRetAddr;
-		//Ãÿ’˜ªÒ»°
+		//ÁâπÂæÅËé∑Âèñ
 		GetAddr(PsResumeThreadCode, &ulRetAddr);
 		PsResumeThreadFunc = (PsResumeThreadProc)ulRetAddr;
 	}
