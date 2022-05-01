@@ -2,7 +2,7 @@
 
 ULONG PsSuspendThreadCode[8] = { 0x24548948 ,0xc894810 , 0x56530824 ,0x41544157 ,0xec834855 ,0xea8b4c40 ,0x33f18b48 ,0x247c89ff };
 ULONG PsResumeThreadCode[8] = { 0x8348f3ff ,0x8b4820ec ,0x7f1ae8da ,0x8548ffc6,0x890274db ,0x48c03303 ,0x5b20c483 ,0x909090c3 };
-
+ 
 PDRIVER_OBJECT g_DriverObject = NULL;
 extern POBJECT_TYPE* IoDriverObjectType;
 NTSTATUS
