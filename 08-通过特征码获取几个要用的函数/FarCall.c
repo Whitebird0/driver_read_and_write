@@ -17,6 +17,7 @@ ObReferenceObjectByName(
 	__out PVOID* Object
 );
 
+
 NTSTATUS InitGetDriverObject() {
 	UNICODE_STRING usDriverName;
 	RtlInitUnicodeString(&usDriverName, L"\\Driver\\Ndis");
